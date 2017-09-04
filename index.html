@@ -21,39 +21,15 @@
             <h1 id="par-1">Sequences</h1>
             <h2 id="sub-par-1-1">Creating pairs</h2>
             <p>
-                <!-- HTML generated using hilite.me -->
-            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
-                    style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">final</span> Observable<span
-                    style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> numbers <span
-                    style="color: #333333">=</span> Observable<span style="color: #333333">.</span><span
-                    style="color: #0000CC">from</span><span style="color: #333333">(</span>Arrays<span
-                    style="color: #333333">.</span><span style="color: #0000CC">asList</span><span
-                    style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">2</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">3</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">4</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">5</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">6</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">7</span><span
-                    style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">8</span><span
-                    style="color: #333333">));</span>
+                <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">// Input:  1 - 2 - 3 - 4 - 5 - 6 - 7 - 8</span>
+        <span style="color: #888888">// Output: [1, 2] - [2, 3]-  [3, 4]-  [4, 5] -  [5, 6] - [6, 7], [7, 8]</span>
+        <span style="color: #008800; font-weight: bold">final</span> Observable<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> numbers <span style="color: #333333">=</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">from</span><span style="color: #333333">(</span>Arrays<span style="color: #333333">.</span><span style="color: #0000CC">asList</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">3</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">6</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">7</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">8</span><span style="color: #333333">));</span>
 
         numbers
-                <span style="color: #333333">.</span><span style="color: #0000CC">zipWith</span><span
-                        style="color: #333333">(</span>numbers
-                        <span style="color: #333333">.</span><span style="color: #0000CC">skip</span><span
-                        style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span
-                        style="color: #333333">),</span> <span style="color: #333333">(</span>first<span
-                        style="color: #333333">,</span> second<span style="color: #333333">)</span> <span
-                        style="color: #333333">-&gt;</span> Arrays<span style="color: #333333">.</span><span
-                        style="color: #0000CC">asList</span><span style="color: #333333">(</span>first<span
-                        style="color: #333333">,</span> second<span style="color: #333333">))</span>
-                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span
-                        style="color: #333333">(</span>System<span style="color: #333333">.</span><span
-                        style="color: #0000CC">out</span><span style="color: #333333">::</span>println<span
-                        style="color: #333333">);</span>
-</pre>
-            </div>
+                <span style="color: #333333">.</span><span style="color: #0000CC">zipWith</span><span style="color: #333333">(</span>numbers
+                        <span style="color: #333333">.</span><span style="color: #0000CC">skip</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">),</span> <span style="color: #333333">(</span>first<span style="color: #333333">,</span> second<span style="color: #333333">)</span> <span style="color: #333333">-&gt;</span> Arrays<span style="color: #333333">.</span><span style="color: #0000CC">asList</span><span style="color: #333333">(</span>first<span style="color: #333333">,</span> second<span style="color: #333333">))</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span>System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">::</span>println<span style="color: #333333">);</span>
+</pre></div>
 
             </p>
             <h2 id="sub-par-1-2">sub-par-1-2</h2>
