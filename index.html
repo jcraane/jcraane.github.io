@@ -96,8 +96,116 @@
 </pre></div>
 
             </p>
+            <h2 id="sub-par-2-3">Cache network responses</h2>
+            <p>
+                <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">CacheNetworkResponses</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">boolean</span> simulateNetworkError<span style="color: #333333">;</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">final</span> Cache memoryCache <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Cache<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;MEMORY&quot;</span><span style="color: #333333">),</span> diskCache <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Cache<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;DISK&quot;</span><span style="color: #333333">);</span>
+
+        <span style="color: #008800; font-weight: bold">final</span> Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> multipleSources <span style="color: #333333">=</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">concat</span><span style="color: #333333">(</span>
+                memoryCache<span style="color: #333333">.</span><span style="color: #0000CC">getFromCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">),</span>
+                diskCache<span style="color: #333333">.</span><span style="color: #0000CC">getFromCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">),</span>
+                fromNetwork<span style="color: #333333">()</span>
+                        <span style="color: #333333">.</span><span style="color: #0000CC">doOnNext</span><span style="color: #333333">(</span><span style="color: #997700; font-weight: bold">memoryCache:</span><span style="color: #333333">:</span>putInCache<span style="color: #333333">)</span>
+                        <span style="color: #333333">.</span><span style="color: #0000CC">doOnNext</span><span style="color: #333333">(</span><span style="color: #997700; font-weight: bold">diskCache:</span><span style="color: #333333">:</span>putInCache<span style="color: #333333">)</span>
+                        <span style="color: #333333">.</span><span style="color: #0000CC">onErrorResumeNext</span><span style="color: #333333">(</span>throwable <span style="color: #333333">-&gt;</span>
+                                diskCache<span style="color: #333333">.</span><span style="color: #0000CC">getFromCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">)</span>
+                                        <span style="color: #333333">.</span><span style="color: #0000CC">filter</span><span style="color: #333333">(</span><span style="color: #997700; font-weight: bold">Objects:</span><span style="color: #333333">:</span>nonNull<span style="color: #333333">)</span>
+                                        <span style="color: #333333">.</span><span style="color: #0000CC">switchIfEmpty</span><span style="color: #333333">(</span>Observable<span style="color: #333333">.</span><span style="color: #0000CC">error</span><span style="color: #333333">(</span>throwable<span style="color: #333333">)))</span>
+        <span style="color: #333333">);</span>
+
+        multipleSources
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
+
+        multipleSources
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
+
+        memoryCache<span style="color: #333333">.</span><span style="color: #0000CC">invalidate</span><span style="color: #333333">();</span>
+
+        multipleSources
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
+
+        simulateNetworkError <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+        diskCache<span style="color: #333333">.</span><span style="color: #0000CC">stale</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+
+        multipleSources
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
+
+        simulateNetworkError <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+        diskCache<span style="color: #333333">.</span><span style="color: #0000CC">cached</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+
+        multipleSources
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">static</span> Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #0066BB; font-weight: bold">fromNetwork</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">fromCallable</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> <span style="color: #333333">{</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;getFrom NETWORK&quot;</span><span style="color: #333333">);</span>
+            <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>simulateNetworkError<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">RuntimeException</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Network error occurred&quot;</span><span style="color: #333333">);</span>
+            <span style="color: #333333">}</span>
+            <span style="color: #008800; font-weight: bold">return</span> <span style="background-color: #fff0f0">&quot;value&quot;</span><span style="color: #333333">;</span>
+        <span style="color: #333333">});</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Cache</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">final</span> String type<span style="color: #333333">;</span>
+        <span style="color: #333399; font-weight: bold">boolean</span> stale<span style="color: #333333">;</span>
+        String cached<span style="color: #333333">;</span>
+
+        <span style="color: #008800; font-weight: bold">private</span> <span style="color: #0066BB; font-weight: bold">Cache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> String type<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+            <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">type</span> <span style="color: #333333">=</span> type<span style="color: #333333">;</span>
+        <span style="color: #333333">}</span>
+
+        Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #0066BB; font-weight: bold">getFromCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> <span style="color: #333399; font-weight: bold">boolean</span> ignoreStaleData<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+            <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">defer</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> <span style="color: #333333">{</span>
+                System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span>String<span style="color: #333333">.</span><span style="color: #0000CC">format</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;getFrom [%s]&quot;</span><span style="color: #333333">,</span> type<span style="color: #333333">));</span>
+                <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>cached <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span> <span style="color: #333333">||</span> <span style="color: #333333">(</span>stale <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>ignoreStaleData<span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                    <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">empty</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">just</span><span style="color: #333333">(</span>cached<span style="color: #333333">);</span>
+            <span style="color: #333333">});</span>
+        <span style="color: #333333">}</span>
+
+        <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">putInCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> String value<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+            cached <span style="color: #333333">=</span> value<span style="color: #333333">;</span>
+        <span style="color: #333333">}</span>
+
+        <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">invalidate</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+            cached <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+        <span style="color: #333333">}</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">DataSubscriber</span> <span style="color: #008800; font-weight: bold">extends</span> Subscriber<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+        <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">onCompleted</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+
+        <span style="color: #333333">}</span>
+
+        <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">onError</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> Throwable e<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Cannot load data&quot;</span><span style="color: #333333">);</span>
+        <span style="color: #333333">}</span>
+
+        <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">onNext</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> String s<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span>s<span style="color: #333333">);</span>
+        <span style="color: #333333">}</span>
+    <span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>
+
+            </p>
             <h1 id="par-3">Various</h1>
-            <h2 id="sub-par-1-3">Scheduling network requests</h2>
+            <h2 id="sub-par-3-1">Scheduling network requests</h2>
             <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">SchedulingExceptionDemo</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> IOException <span style="color: #333333">{</span>
@@ -133,7 +241,7 @@
 
             </p>
 
-            <h2 id="sub-par-2-3">Sharing values</h2>
+            <h2 id="sub-par-3-2">Sharing values</h2>
             <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">SharingValues</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
@@ -149,7 +257,7 @@
             </p>
 
             <h1 id="par-4">Functional</h1>
-            <h2 id="sub-par-1-4">Auto suggest</h2>
+            <h2 id="sub-par-4-1">Auto suggest</h2>
             <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">AutoSuggest</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">final</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> SLEEP_TIMES <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]{</span><span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">};</span>
