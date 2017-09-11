@@ -114,34 +114,30 @@
                                 diskCache<span style="color: #333333">.</span><span style="color: #0000CC">getFromCache</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">)</span>
                                         <span style="color: #333333">.</span><span style="color: #0000CC">filter</span><span style="color: #333333">(</span><span style="color: #997700; font-weight: bold">Objects:</span><span style="color: #333333">:</span>nonNull<span style="color: #333333">)</span>
                                         <span style="color: #333333">.</span><span style="color: #0000CC">switchIfEmpty</span><span style="color: #333333">(</span>Observable<span style="color: #333333">.</span><span style="color: #0000CC">error</span><span style="color: #333333">(</span>throwable<span style="color: #333333">)))</span>
-        <span style="color: #333333">);</span>
+        <span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">);</span>
 
         multipleSources
-                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
                 <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
 
         multipleSources
-                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
                 <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
 
         memoryCache<span style="color: #333333">.</span><span style="color: #0000CC">invalidate</span><span style="color: #333333">();</span>
 
         multipleSources
-                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
                 <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
 
         simulateNetworkError <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
         diskCache<span style="color: #333333">.</span><span style="color: #0000CC">stale</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
 
         multipleSources
-                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
                 <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
 
         simulateNetworkError <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
         diskCache<span style="color: #333333">.</span><span style="color: #0000CC">cached</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
 
         multipleSources
-                <span style="color: #333333">.</span><span style="color: #0000CC">take</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span>
                 <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> DataSubscriber<span style="color: #333333">());</span>
     <span style="color: #333333">}</span>
 
@@ -202,7 +198,6 @@
     <span style="color: #333333">}</span>
 <span style="color: #333333">}</span>
 </pre></div>
-
             </p>
             <h1 id="par-3">Various</h1>
             <h2 id="sub-par-3-1">Scheduling network requests</h2>
