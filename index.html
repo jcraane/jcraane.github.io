@@ -79,6 +79,12 @@
             </p>
             <h2 id="sub-par-2-2">Combine network requests/responses</h2>
             <p>
+                This pattern demonstrates retrieving data from an asynchronous datasource and then using the result of this invocation to retrieve two pieces of data from two other asynchronous data sources and then combining the result of both invoications in one response.
+            </p>
+            <p>
+                Please note that when one of the sources in the zipWith operator fails, no result is retured at all since zipWith needs both observables to emit a value.
+            </p>
+            <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">CombineNetworkRequests</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> IOException <span style="color: #333333">{</span>
         <span style="color: #008800; font-weight: bold">final</span> MockWebServer mockWebServer <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> MockWebServer<span style="color: #333333">();</span>
