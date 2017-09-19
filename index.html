@@ -21,7 +21,7 @@
             <h1 id="par-1">Combining</h1>
             <h2 id="sub-par-1-1">Creating pairs</h2>
             <p>
-                This demo generates consecutive pairs from a sequence of numbers. This is done by combining the original sequence with a the same sequence starting from the second element (the skip(1)). The zip function combines the elements from both streams in order and emits as many items as the source observable with the fewest items.
+                This demo generates consecutive pairs from a sequence of numbers. This is done by combining the original sequence with the same sequence starting from the second element (the skip(1)). The zip function combines the elements from both streams in order and emits as many items as the source observable with the fewest items.
                 See <a href="http://reactivex.io/documentation/operators/zip.html" class="href">Zip function</a>.
             </p>
             <p>
@@ -39,8 +39,13 @@
             <h1 id="par-2">Network requests</h1>
             <h2 id="sub-par-2-1">Retrofit Android</h2>
             <p>
-                This patterns demos executing a <a href="http://square.github.io/retrofit/">Retrofit</a> request within Android. To always execute the request in the background you can create the RxJavaCallAdapter by using the Schedulers.io() scheduler. For testing you can pass an immediate() or a test scheduler during creation of the API.</p>
-                <p>Make sure that when you touch any views in the subsribe function, you must use observeOn(AndroidSchedulers.mainThread()) because views can only be updated from the main thread. Also use an onError handler to avoid OnErrorNotImplemented exceptions.
+                This patterns demos executing a <a href="http://square.github.io/retrofit/">Retrofit</a> request within Android. To always execute the request in the background you can create the RxJavaCallAdapter by using the Schedulers.io() scheduler. For testing you can pass an immediate() or a test scheduler during creation of the API.
+            </p>
+            <p>
+                Make sure that when you touch any views in the subsribe function, you must use observeOn(AndroidSchedulers.mainThread()) because views can only be updated from the main thread. Also use an onError handler to avoid OnErrorNotImplemented exceptions.
+            </p>
+            <p>
+                The subscription is unsubscribed when the network request is finished. It is good practive however to unsubsribe in the proper life-cycle method, for example onPause(). For this you can use a CompositeSubscription and add any subscriptions that must be unsubscribed when the activity pauses. To unsubscribe using a CompositeSubscription call its clear() method. By using the clear() method, the CompositeSubscription can be re-used in contrast to the unsubscribe() method.
             </p>
             <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">RetrofitTest</span> <span style="color: #333333">{</span>
