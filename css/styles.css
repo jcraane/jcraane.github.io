@@ -34,3 +34,11 @@ h2 {
     font-weight:300;
     font-size:1.5rem;
 }
+
+div#static-content h1 {
+    margin-top: 40px;
+}
+
+div#static-content h2 {
+    margin-bottom: 20px;
+}
