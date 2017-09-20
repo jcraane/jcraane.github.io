@@ -117,6 +117,28 @@
             </p>
             <h2 id="sub-par-2-3">Cache network responses</h2>
             <p>
+                This pattern demonstrates a strategy for caching network data using reactive extensions. It is a common pattern to cache data a specific time before fetching it again from a network. The basic flow is as follows:
+
+                <ol>
+                    <li>Fetch data from the in-memory store if it exists and is not stale.</li>
+                    <li>Fetch data from the disk store if it exists and is not stale.</li>
+                    <li>Fetch data from the network.</li>
+                    <li>If succesfull, populate the in-memory and disk store.</li>
+                    <li>If not succesful, retrieve potential stale data from the disk cache if it exists (this disk cache acts as a fallback mechanism).</li>
+                    <li>If no data exists in the disk cache, reply with an error.</li>
+                </ol>
+            </p>
+            <p>
+                The in-memory and disk cache may use different expiry policies. The in-memory cache may be size and time based while the disk cache may be time based. The disk cache will survive application restarts while the in-memory cache may not.
+            </p>
+            <p>
+                When using the disk cache as a fallback mechanism in case of network errors, think about what to show to the user. Perhaps the timestamp of the data so the user knows the data is not up-to-date and may need to be refresed later.
+            </p>
+            <p>
+                Remember this is not the only way to handle this scenario. You might implement an <a
+                    href="#sub-par-4-2">exponential backoff </a> algorithm when retrieving data from the network before using the disk cache as a fallback mechanism.
+            </p>
+            <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">CacheNetworkResponses</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">boolean</span> simulateNetworkError<span style="color: #333333">;</span>
 
