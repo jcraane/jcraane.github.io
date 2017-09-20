@@ -132,7 +132,7 @@
                 </ol>
             </p>
             <p>
-                The in-memory and disk cache may use different expiry policies. The in-memory cache may be size and time based while the disk cache may be time based. The disk cache will survive application restarts while the in-memory cache may not.
+                The in-memory and disk cache may use different expiry policies. The in-memory cache may have a size- and time-based constraint while the disk cache only has a time-based constraint. The disk cache will survive application restarts while the in-memory cache may not.
             </p>
             <p>
                 When using the disk cache as a fallback mechanism in case of network errors, think about what to show to the user. Perhaps the timestamp of the data so the user knows the data is not up-to-date and may need to be refresed later.
