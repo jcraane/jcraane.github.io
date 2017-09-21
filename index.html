@@ -287,8 +287,17 @@
 </pre></div>
 
             </p>
-
             <h2 id="sub-par-3-2">Sharing values</h2>
+            <p>
+                A common pattern is sharing the result of an Observable between multiple subsribers, for example a network call. For demonstration purposes the System::nanoTime is emitted. By using the combination of
+                <ol>
+                    <li><a href="http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html#share--">share</a> multicasts the original observer as long as there is at least one subscriber.</li>
+                    <li><a href="http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html#replay--">replay</a>  returns a ConnectableObservable that shares a single subscription to the underlying Observable that will replay all of its items and notifications to any future Observer.</li>
+                    <li>
+                        <a href="http://reactivex.io/RxJava/1.x/javadoc/rx/observables/ConnectableObservable.html#autoConnect--">autoConnect</a> returns an Observable that automatically connects to this ConnectableObservable when the first Subscriber subscribes.</li>
+                </ol>
+                we are able to share the first emitted nanoTime value to all subscribers.
+            </p>
             <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">SharingValues</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
