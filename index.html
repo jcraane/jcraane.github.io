@@ -387,6 +387,12 @@
             </p>
             <h2 id="sub-par-4-2">Exponential Backoff</h2>
             <p>
+                When scheduling repeated work <a href="https://en.wikipedia.org/wiki/Exponential_backoff">Exponential backoff</a> can be used to retry a failed request. When the scheduling interval is high (for example 1 hour), this makes sure the request is retried relatively fast so you do not have to wait before the next interval occurs.
+            </p>
+            <p>
+                Exponential backoff can be implemented using the onErrorResumeNext function and then comparing the actual number of invocations with a specified maximum. Each next invocation is delayed exponentially more then the previous invocation.
+            </p>
+            <p>
                 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">ExponentialBackOff</span> <span style="color: #333333">{</span>
     <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">final</span> String RESPONSE <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;[\n&quot;</span> <span style="color: #333333">+</span>
             <span style="background-color: #fff0f0">&quot;  {\&quot;name\&quot;: \&quot;&#39;s-Hertogenbosch\&quot;},\n&quot;</span> <span style="color: #333333">+</span>
