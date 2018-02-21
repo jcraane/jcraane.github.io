@@ -490,6 +490,93 @@
 </pre></div>
 
             </p>
+            <h2 id="sub-par-4-3">SQS long polling</h2>
+            <p>
+                Demonstrates SQS long polling with RxJava. A long polling request may return 0 or more messages up to the configured maximum. Those messages are processed in parallel
+                and a new long polling request is started when all messages are processed.
+            </p>
+            <p>
+                <!-- HTML generated using hilite.me --><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">rx.Observable</span><span style="color: #333333">;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">rx.schedulers.Schedulers</span><span style="color: #333333">;</span>
+
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.ArrayList</span><span style="color: #333333">;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.List</span><span style="color: #333333">;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Random</span><span style="color: #333333">;</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">SqsReceiverSample</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">final</span> Random RANDOM <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Random<span style="color: #333333">();</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> InterruptedException <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">SqsReceiverSample</span><span style="color: #333333">().</span><span style="color: #0000CC">run</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">run</span><span style="color: #333333">()</span> <span style="color: #008800; font-weight: bold">throws</span> InterruptedException <span style="color: #333333">{</span>
+        receive<span style="color: #333333">()</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">concatMap</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">::</span>handleMessages<span style="color: #333333">)</span> <span style="color: #888888">// The concatMap makes sure the polling of the next messages starts if all the inner observables complete.</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">doOnError</span><span style="color: #333333">(</span><span style="color: #997700; font-weight: bold">Throwable:</span><span style="color: #333333">:</span>printStackTrace<span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">doOnCompleted</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;COMPLETED -----------------------------------&quot;</span><span style="color: #333333">))</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">repeat</span><span style="color: #333333">()</span> <span style="color: #888888">// subscribe again to this observable when this observable completes</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">retry</span><span style="color: #333333">()</span> <span style="color: #888888">// subscribe again to this onservable in case of errors</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">subscribe</span><span style="color: #333333">();</span>
+
+        Thread<span style="color: #333333">.</span><span style="color: #0000CC">sleep</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">10000</span><span style="color: #333333">);</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #888888">/**</span>
+<span style="color: #888888">     * Simluate an SQS long-polling request which returns 0 to max messages at once.</span>
+<span style="color: #888888">     * @return</span>
+<span style="color: #888888">     */</span>
+    <span style="color: #008800; font-weight: bold">private</span> Observable<span style="color: #333333">&lt;</span>List<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;&gt;</span> <span style="color: #0066BB; font-weight: bold">receive</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">fromCallable</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> <span style="color: #333333">{</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;-----------------------------------------&quot;</span><span style="color: #333333">);</span>
+            <span style="color: #008800; font-weight: bold">final</span> ArrayList<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> result <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> ArrayList<span style="color: #333333">&lt;&gt;(</span>RANDOM<span style="color: #333333">.</span><span style="color: #0000CC">nextInt</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">8</span><span style="color: #333333">)</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">);</span>
+            <span style="color: #008800; font-weight: bold">for</span> <span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i <span style="color: #333333">&lt;</span> RANDOM<span style="color: #333333">.</span><span style="color: #0000CC">nextInt</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">8</span><span style="color: #333333">)</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                result<span style="color: #333333">.</span><span style="color: #0000CC">add</span><span style="color: #333333">(</span>String<span style="color: #333333">.</span><span style="color: #0000CC">valueOf</span><span style="color: #333333">(</span>i<span style="color: #333333">));</span>
+            <span style="color: #333333">}</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;MESSAGES TO HANDLE &quot;</span> <span style="color: #333333">+</span> result<span style="color: #333333">.</span><span style="color: #0000CC">size</span><span style="color: #333333">());</span>
+            <span style="color: #008800; font-weight: bold">return</span> result<span style="color: #333333">;</span>
+        <span style="color: #333333">});</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #888888">/**</span>
+<span style="color: #888888">     * Split the messages and handle each message using a flatMap call</span>
+<span style="color: #888888">     * @param messages</span>
+<span style="color: #888888">     * @return</span>
+<span style="color: #888888">     */</span>
+    <span style="color: #008800; font-weight: bold">private</span> Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #0066BB; font-weight: bold">handleMessages</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> List<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> messages<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">from</span><span style="color: #333333">(</span>messages<span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">flatMap</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">::</span>handleMessage<span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">flatMap</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">::</span>deleteMessage<span style="color: #333333">)</span>
+                <span style="color: #333333">.</span><span style="color: #0000CC">onErrorResumeNext</span><span style="color: #333333">(</span>Observable<span style="color: #333333">.</span><span style="color: #0000CC">empty</span><span style="color: #333333">());</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #888888">/**</span>
+<span style="color: #888888">     * This method creates an observable which handles each message in its separate thread.</span>
+<span style="color: #888888">     * @param message</span>
+<span style="color: #888888">     * @return</span>
+<span style="color: #888888">     */</span>
+    <span style="color: #008800; font-weight: bold">private</span> Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #0066BB; font-weight: bold">handleMessage</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> String message<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">fromCallable</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> <span style="color: #333333">{</span>
+            Thread<span style="color: #333333">.</span><span style="color: #0000CC">sleep</span><span style="color: #333333">(</span>RANDOM<span style="color: #333333">.</span><span style="color: #0000CC">nextInt</span><span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">1500</span><span style="color: #333333">));</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;HANDLE: &quot;</span> <span style="color: #333333">+</span> message<span style="color: #333333">);</span>
+            <span style="color: #008800; font-weight: bold">return</span> message<span style="color: #333333">;</span>
+        <span style="color: #333333">}).</span><span style="color: #0000CC">subscribeOn</span><span style="color: #333333">(</span>Schedulers<span style="color: #333333">.</span><span style="color: #0000CC">io</span><span style="color: #333333">());</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #888888">/**</span>
+<span style="color: #888888">     * After processing the message make sure to delete it from the queue.</span>
+<span style="color: #888888">     * @param message</span>
+<span style="color: #888888">     * @return</span>
+<span style="color: #888888">     */</span>
+    <span style="color: #008800; font-weight: bold">private</span> Observable<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> <span style="color: #0066BB; font-weight: bold">deleteMessage</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">final</span> String message<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+        <span style="color: #008800; font-weight: bold">return</span> Observable<span style="color: #333333">.</span><span style="color: #0000CC">fromCallable</span><span style="color: #333333">(()</span> <span style="color: #333333">-&gt;</span> <span style="color: #333333">{</span>
+            System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;DELETE: &quot;</span> <span style="color: #333333">+</span> message<span style="color: #333333">);</span>
+            <span style="color: #008800; font-weight: bold">return</span> message<span style="color: #333333">;</span>
+        <span style="color: #333333">});</span>
+    <span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>
+            </p>
         </div>
     </div>
 </div>
