@@ -605,7 +605,7 @@
                         .debounce(<span style="color: #6600EE; font-weight: bold">300</span>, TimeUnit.MILLISECONDS),
                 BiFunction { t1, t2 -&gt; Pair(t1, t2) }
         )
-                .concatMap { myApi.retrieveAddress(it.first, it.second) }
+                .switchMap { myApi.retrieveAddress(it.first, it.second) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ Toast.makeText(<span style="color: #008800; font-weight: bold">this</span>, it.street, Toast.LENGTH_SHORT).show() }, { it.printStackTrace() })
     }
