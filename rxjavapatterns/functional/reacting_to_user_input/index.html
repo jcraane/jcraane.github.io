@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.74.1" />
-<title>Async Code Patterns</title>
+<title>Reacting To User Input</title>
 
 
-
-  
 
 
 <meta charset="utf-8">
@@ -54,6 +51,10 @@
 
 
 
+  
+    <script src="http://example.org//js/toc-collapse.js"></script>
+  
+
 
 
 
@@ -66,7 +67,7 @@
 </head><body>
     	<div id="app"><div ref="sideContainer" class="side-container">
     
-    <a class="a-block nav-head active" href="http://example.org/">
+    <a class="a-block nav-head false" href="http://example.org/">
     
         <div class="nav-title">
             Async Code Patterns
@@ -80,9 +81,11 @@
             
             
             
+                
             
             
-            <a class="a-block nav-link-item false" href="/rxjavapatterns">
+            
+            <a class="a-block nav-link-item active" href="/rxjavapatterns">
                 RxJava Patterns
             </a>
             
@@ -120,9 +123,11 @@
             
             
             
+                
             
             
-            <a class="a-block nav-link-item false" href="/rxjavapatterns/functional">
+            
+            <a class="a-block nav-link-item active" href="/rxjavapatterns/functional">
                 Functional
             </a>
             
@@ -148,6 +153,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </div><div ref="extraContainer" class="extra-container">
     
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
@@ -165,8 +175,6 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
         </a>
         
         
-        
-        
     </div>
 </div><div class="single-column-drawer-container" ref="drawer"
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
@@ -178,9 +186,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
                 
                 
                 
+                    
                 
                 
-                <a class="a-block drawer-menu-item false" href="/rxjavapatterns">
+                
+                <a class="a-block drawer-menu-item active" href="/rxjavapatterns">
                     RxJava Patterns
                 </a>
                 
@@ -218,13 +228,20 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
                 
                 
                 
+                    
                 
                 
-                <a class="a-block drawer-menu-item false" href="/rxjavapatterns/functional">
+                
+                <a class="a-block drawer-menu-item active" href="/rxjavapatterns/functional">
                     Functional
                 </a>
                 
             
+            
+            <div class="toc">
+
+
+</div>
             
         </div>
     </div>
@@ -264,328 +281,127 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
     </a>
 </div>
             <div id="content">
-
 <div ref="streamContainer" class="stream-container">
-    <div class="post-list-container post-list-container-no-background">
-        
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
             
-            <a href="http://example.org/rxjavapatterns/functional/reacting_to_user_input/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Reacting To User Input
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-10
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            
+            
 
-    </br>
-    This demo consists of a user interface containing a zipcode and housenumber fields. We want to retri ...
-</div>
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Reacting To User Input
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-07-10 11:35
+                        </time>
+                        
 
-                        </div>
+                        
+
                         
                         
                     </div>
                 </div>
+            </div>
             
-        
-            
-            <a href="http://example.org/rxjavapatterns/functional/sqs_long_polling/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                SQS Long Polling
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-09
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <p>This demo consists of a user interface containing a zipcode and housenumber fields. We want to retrieve the addess for zipcode and housenumber combination when both fields are filled-in by the user and valid. When the housenumber changes, we want to wait 300ms before exeuting the request. This demo is written in Android/Kotlin and uses an extension function to convert the EditText input to an Observable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">:</span> AppCompatActivity<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    override fun <span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>savedInstanceState<span style="color:#f92672">:</span> Bundle<span style="color:#f92672">?)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>savedInstanceState<span style="color:#f92672">)</span>
+        setContentView<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">layout</span><span style="color:#f92672">.</span><span style="color:#a6e22e">activity_main</span><span style="color:#f92672">)</span>
 
-    </br>
-    Demonstrates &lt;a href=&#34;https://aws.amazon.com/sqs/&#34;&gt;SQS&lt;/a&gt; long polling with RxJava. A long polling  ...
-</div>
+        val myApi <span style="color:#f92672">=</span> Retrofit<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">baseUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;SERVER_URL&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">addCallAdapterFactory</span><span style="color:#f92672">(</span>RxJava2CallAdapterFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createWithScheduler</span><span style="color:#f92672">(</span>Schedulers<span style="color:#f92672">.</span><span style="color:#a6e22e">io</span><span style="color:#f92672">()))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">addConverterFactory</span><span style="color:#f92672">(</span>GsonConverterFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>GsonBuilder<span style="color:#f92672">().</span><span style="color:#a6e22e">create</span><span style="color:#f92672">()))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">().</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>MyApi<span style="color:#f92672">::</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">java</span><span style="color:#f92672">)</span>
 
-                        </div>
-                        
-                        
-                    </div>
+        val zipcodeSubject <span style="color:#f92672">=</span> zipCode<span style="color:#f92672">.</span><span style="color:#a6e22e">toObservable</span><span style="color:#f92672">()</span>
+        val houseNumberSubject <span style="color:#f92672">=</span> houseNumber<span style="color:#f92672">.</span><span style="color:#a6e22e">toObservable</span><span style="color:#f92672">()</span>
+
+        Observable<span style="color:#f92672">.</span><span style="color:#a6e22e">combineLatest</span><span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">,</span> Pair<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;&gt;(</span>
+                zipcodeSubject
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">filter</span> <span style="color:#f92672">{</span> postcode <span style="color:#f92672">-&gt;</span> zipCodeRegExp<span style="color:#f92672">.</span><span style="color:#a6e22e">matcher</span><span style="color:#f92672">(</span>postcode<span style="color:#f92672">).</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">()</span> <span style="color:#f92672">},</span>
+                houseNumberSubject
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span> <span style="color:#f92672">{</span> it<span style="color:#f92672">.</span><span style="color:#a6e22e">trim</span><span style="color:#f92672">()</span> <span style="color:#f92672">}</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">({</span> it<span style="color:#f92672">.</span><span style="color:#a6e22e">isNotEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">})</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">debounce</span><span style="color:#f92672">(</span>300<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">MILLISECONDS</span><span style="color:#f92672">),</span>
+                BiFunction <span style="color:#f92672">{</span> t1<span style="color:#f92672">,</span> t2 <span style="color:#f92672">-&gt;</span> Pair<span style="color:#f92672">(</span>t1<span style="color:#f92672">,</span> t2<span style="color:#f92672">)</span> <span style="color:#f92672">}</span>
+        <span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">switchMap</span> <span style="color:#f92672">{</span> myApi<span style="color:#f92672">.</span><span style="color:#a6e22e">retrieveAddress</span><span style="color:#f92672">(</span>it<span style="color:#f92672">.</span><span style="color:#a6e22e">first</span><span style="color:#f92672">,</span> it<span style="color:#f92672">.</span><span style="color:#a6e22e">second</span><span style="color:#f92672">)</span> <span style="color:#f92672">}</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">observeOn</span><span style="color:#f92672">(</span>AndroidSchedulers<span style="color:#f92672">.</span><span style="color:#a6e22e">mainThread</span><span style="color:#f92672">())</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">subscribe</span><span style="color:#f92672">({</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">makeText</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> it<span style="color:#f92672">.</span><span style="color:#a6e22e">street</span><span style="color:#f92672">,</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">LENGTH_SHORT</span><span style="color:#f92672">).</span><span style="color:#a6e22e">show</span><span style="color:#f92672">()</span> <span style="color:#f92672">},</span> <span style="color:#f92672">{</span> it<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">()</span> <span style="color:#f92672">})</span>
+    <span style="color:#f92672">}</span>
+
+    companion object <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">private</span> val zipCodeRegExp <span style="color:#f92672">=</span> Pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;[0-9]{4}[A-z]{2}&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+fun EditText<span style="color:#f92672">.</span><span style="color:#a6e22e">toObservable</span><span style="color:#f92672">():</span> Observable<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+    val subject <span style="color:#f92672">=</span> PublishSubject<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;()</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addTextChangedListener</span><span style="color:#f92672">(</span>object <span style="color:#f92672">:</span> TextWatcher <span style="color:#f92672">{</span>
+        override fun <span style="color:#a6e22e">afterTextChanged</span><span style="color:#f92672">(</span>p0<span style="color:#f92672">:</span> Editable<span style="color:#f92672">?)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">// Ignore
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+
+        override fun <span style="color:#a6e22e">beforeTextChanged</span><span style="color:#f92672">(</span>p0<span style="color:#f92672">:</span> CharSequence<span style="color:#f92672">?,</span> p1<span style="color:#f92672">:</span> Int<span style="color:#f92672">,</span> p2<span style="color:#f92672">:</span> Int<span style="color:#f92672">,</span> p3<span style="color:#f92672">:</span> Int<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">// Ignore
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+
+        override fun <span style="color:#a6e22e">onTextChanged</span><span style="color:#f92672">(</span>charSequence<span style="color:#f92672">:</span> CharSequence<span style="color:#f92672">,</span> start<span style="color:#f92672">:</span> Int<span style="color:#f92672">,</span> before<span style="color:#f92672">:</span> Int<span style="color:#f92672">,</span> count<span style="color:#f92672">:</span> Int<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            subject<span style="color:#f92672">.</span><span style="color:#a6e22e">onNext</span><span style="color:#f92672">(</span>charSequence<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">())</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">})</span>
+    <span style="color:#66d9ef">return</span> subject
+<span style="color:#f92672">}</span>
+</code></pre></div>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">Last modified on 2020-07-10</p>
+                    
                 </div>
+            </div>
             
-        
             
-            <a href="http://example.org/rxjavapatterns/functional/exponential_backoff/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Exponential Backoff
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-08
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            <nav class="post-pagination">
 
-    </br>
-    When scheduling repeated work &lt;a href=&#34;https://en.wikipedia.org/wiki/Exponential_backoff&#34;&gt;Exponentia ...
-</div>
+                
+                <a class="newer-posts">
+			Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://example.org/rxjavapatterns/functional/sqs_long_polling/">
+			Previous<br>SQS Long Polling
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/functional/autosuggest/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Autosuggest
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-07
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    The auto suggest demo, demonstrates a possible implementation for text based suggestion using rx. Th ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/various/sharing_values/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Sharing Values
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-06
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    A common pattern is sharing the result of an Observable between multiple subsribers, for example a n ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/various/scheduling_network_requests/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Scheduling Network Requests
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-05
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    This pattern demonstrates scheduling periodic network requests which can be useful for keeping data  ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/cache_network_responses/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Cache Network Responses
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-04
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This pattern demonstrates a strategy for caching network data using reactive extensions. It is a com ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/combine_network_requests/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Combine Network Requests/Responses
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-03
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This pattern demonstrates retrieving data from an asynchronous datasource and then using the result  ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/retrofit_android/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Retrofit Android
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-02
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This patterns demos executing a &lt;a href=&#34;http://square.github.io/retrofit/&#34;&gt;Retrofit&lt;/a&gt; request wit ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/combined/creating_pairs/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Creating Pairs
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-01
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This demo generates consecutive pairs from a sequence of numbers. This is done by combining the orig ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-        </a>
+            </div>
+        </div>
     </div>
 </div>
 
-            </div>
-
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>

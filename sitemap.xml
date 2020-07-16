@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/functional/</loc>
+    <lastmod>2020-07-10T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2020-07-10T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</loc>
+    <lastmod>2020-07-10T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/</loc>
+    <lastmod>2020-07-10T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/functional/sqs_long_polling/</loc>
+    <lastmod>2020-07-09T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/functional/exponential_backoff/</loc>
+    <lastmod>2020-07-08T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/functional/autosuggest/</loc>
+    <lastmod>2020-07-07T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/various/</loc>
+    <lastmod>2020-07-06T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/various/sharing_values/</loc>
+    <lastmod>2020-07-06T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/various/scheduling_network_requests/</loc>
+    <lastmod>2020-07-05T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/network_requests/</loc>
+    <lastmod>2020-07-04T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</loc>
+    <lastmod>2020-07-04T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</loc>
+    <lastmod>2020-07-03T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/network_requests/retrofit_android/</loc>
+    <lastmod>2020-07-02T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/combined/</loc>
+    <lastmod>2020-07-01T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/rxjavapatterns/combined/creating_pairs/</loc>
+    <lastmod>2020-07-01T11:35:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/</loc>
+  </url>
+  
+</urlset>

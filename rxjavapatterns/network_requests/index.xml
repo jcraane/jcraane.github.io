@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Async Code Patterns</title>
+    <link>http://example.org/rxjavapatterns/network_requests/</link>
+    <description>Recent content on Async Code Patterns</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Jul 2020 11:35:28 +0200</lastBuildDate>
+    
+	<atom:link href="http://example.org/rxjavapatterns/network_requests/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cache Network Responses</title>
+      <link>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</link>
+      <pubDate>Sat, 04 Jul 2020 11:35:28 +0200</pubDate>
+      
+      <guid>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</guid>
+      <description>This pattern demonstrates a strategy for caching network data using reactive extensions. It is a common pattern to cache data a specific time before fetching it again from a network. The basic flow is as follows:
+ Fetch data from the in-memory store if it exists and is not stale. Fetch data from the disk store if it exists and is not stale. Fetch data from the network. If succesfull, populate the in-memory and disk store.</description>
+    </item>
+    
+    <item>
+      <title>Combine Network Requests/Responses</title>
+      <link>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</link>
+      <pubDate>Fri, 03 Jul 2020 11:35:28 +0200</pubDate>
+      
+      <guid>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</guid>
+      <description>This pattern demonstrates retrieving data from an asynchronous datasource and then using the result of this invocation to retrieve two pieces of data from two other asynchronous data sources and then combining the result of both invocations in one response.
+Please note that when one of the sources in the zipWith operator fails, no result is retured at all since zipWith needs both observables to emit a value.
+public class CombineNetworkRequests { public static void main(String[] args) throws IOException { final MockWebServer mockWebServer = new MockWebServer(); mockWebServer.</description>
+    </item>
+    
+    <item>
+      <title>Retrofit Android</title>
+      <link>http://example.org/rxjavapatterns/network_requests/retrofit_android/</link>
+      <pubDate>Thu, 02 Jul 2020 11:35:28 +0200</pubDate>
+      
+      <guid>http://example.org/rxjavapatterns/network_requests/retrofit_android/</guid>
+      <description>This patterns demos executing a Retrofit request within Android. To always execute the request in the background you can create the RxJavaCallAdapter by using the Schedulers.io() scheduler. For testing you can pass an immediate() or a test scheduler during creation of the API.
+Make sure that when you touch any views in the subsribe function, you must use observeOn(AndroidSchedulers.mainThread()) because views can only be updated from the main thread. Also use an onError handler to avoid OnErrorNotImplemented exceptions.</description>
+    </item>
+    
+  </channel>
+</rss>

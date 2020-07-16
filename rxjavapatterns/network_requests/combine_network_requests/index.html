@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.74.1" />
-<title>Async Code Patterns</title>
+<title>Combine Network Requests/Responses</title>
 
 
-
-  
 
 
 <meta charset="utf-8">
@@ -54,6 +51,10 @@
 
 
 
+  
+    <script src="http://example.org//js/toc-collapse.js"></script>
+  
+
 
 
 
@@ -66,7 +67,7 @@
 </head><body>
     	<div id="app"><div ref="sideContainer" class="side-container">
     
-    <a class="a-block nav-head active" href="http://example.org/">
+    <a class="a-block nav-head false" href="http://example.org/">
     
         <div class="nav-title">
             Async Code Patterns
@@ -80,9 +81,11 @@
             
             
             
+                
             
             
-            <a class="a-block nav-link-item false" href="/rxjavapatterns">
+            
+            <a class="a-block nav-link-item active" href="/rxjavapatterns">
                 RxJava Patterns
             </a>
             
@@ -100,9 +103,11 @@
             
             
             
+                
             
             
-            <a class="a-block nav-link-item false" href="/rxjavapatterns/network_requests">
+            
+            <a class="a-block nav-link-item active" href="/rxjavapatterns/network_requests">
                 Network Requests
             </a>
             
@@ -148,6 +153,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </div><div ref="extraContainer" class="extra-container">
     
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
@@ -165,8 +175,6 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
         </a>
         
         
-        
-        
     </div>
 </div><div class="single-column-drawer-container" ref="drawer"
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
@@ -178,9 +186,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
                 
                 
                 
+                    
                 
                 
-                <a class="a-block drawer-menu-item false" href="/rxjavapatterns">
+                
+                <a class="a-block drawer-menu-item active" href="/rxjavapatterns">
                     RxJava Patterns
                 </a>
                 
@@ -198,9 +208,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
                 
                 
                 
+                    
                 
                 
-                <a class="a-block drawer-menu-item false" href="/rxjavapatterns/network_requests">
+                
+                <a class="a-block drawer-menu-item active" href="/rxjavapatterns/network_requests">
                     Network Requests
                 </a>
                 
@@ -225,6 +237,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
                 </a>
                 
             
+            
+            <div class="toc">
+
+
+</div>
             
         </div>
     </div>
@@ -264,328 +281,105 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
     </a>
 </div>
             <div id="content">
-
 <div ref="streamContainer" class="stream-container">
-    <div class="post-list-container post-list-container-no-background">
-        
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
             
-            <a href="http://example.org/rxjavapatterns/functional/reacting_to_user_input/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Reacting To User Input
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-10
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            
+            
 
-    </br>
-    This demo consists of a user interface containing a zipcode and housenumber fields. We want to retri ...
-</div>
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Combine Network Requests/Responses
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-07-03 11:35
+                        </time>
+                        
 
-                        </div>
+                        
+
                         
                         
                     </div>
                 </div>
+            </div>
             
-        
-            
-            <a href="http://example.org/rxjavapatterns/functional/sqs_long_polling/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                SQS Long Polling
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-09
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <p>This pattern demonstrates retrieving data from an asynchronous datasource and then using the result of this invocation to retrieve two pieces of data from two other asynchronous data sources and then combining the result of both invocations in one response.</p>
+<p>Please note that when one of the sources in the zipWith operator fails, no result is retured at all since zipWith needs both observables to emit a value.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CombineNetworkRequests</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">final</span> MockWebServer mockWebServer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MockWebServer<span style="color:#f92672">();</span>
+        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">enqueue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> MockResponse<span style="color:#f92672">().</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;lat\&#34;: 52.2, \&#34;lng\&#34;: 5.1}&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setResponseCode</span><span style="color:#f92672">(</span>200<span style="color:#f92672">));</span> <span style="color:#75715e">// Response for getLastKnownLocation
+</span><span style="color:#75715e"></span>        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">enqueue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> MockResponse<span style="color:#f92672">().</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;lat\&#34;: 52.55, \&#34;lng\&#34;: 5.11}&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setResponseCode</span><span style="color:#f92672">(</span>200<span style="color:#f92672">));</span> <span style="color:#75715e">// Response for resolve location
+</span><span style="color:#75715e"></span>        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">enqueue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> MockResponse<span style="color:#f92672">().</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;temp\&#34;: 18.5}&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setResponseCode</span><span style="color:#f92672">(</span>200<span style="color:#f92672">));</span> <span style="color:#75715e">// Response for weather
+</span><span style="color:#75715e"></span>        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">enqueue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> MockResponse<span style="color:#f92672">().</span><span style="color:#a6e22e">setBody</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;name\&#34;: \&#34;Utrecht\&#34;}&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setResponseCode</span><span style="color:#f92672">(</span>200<span style="color:#f92672">));</span> <span style="color:#75715e">// Response for location
+</span><span style="color:#75715e"></span>        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
 
-    </br>
-    Demonstrates &lt;a href=&#34;https://aws.amazon.com/sqs/&#34;&gt;SQS&lt;/a&gt; long polling with RxJava. A long polling  ...
-</div>
+        <span style="color:#66d9ef">final</span> String baseUrl <span style="color:#f92672">=</span> mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">url</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">final</span> LocationApi locationApi <span style="color:#f92672">=</span> RetroFitFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getApi</span><span style="color:#f92672">(</span>baseUrl<span style="color:#f92672">,</span> Schedulers<span style="color:#f92672">.</span><span style="color:#a6e22e">immediate</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>LocationApi<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">final</span> WeatherApi weatherApi <span style="color:#f92672">=</span> RetroFitFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getApi</span><span style="color:#f92672">(</span>baseUrl<span style="color:#f92672">,</span> Schedulers<span style="color:#f92672">.</span><span style="color:#a6e22e">immediate</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>WeatherApi<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">final</span> PlacesApi placesApi <span style="color:#f92672">=</span> RetroFitFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getApi</span><span style="color:#f92672">(</span>baseUrl<span style="color:#f92672">,</span> Schedulers<span style="color:#f92672">.</span><span style="color:#a6e22e">immediate</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>PlacesApi<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
 
-                        </div>
-                        
-                        
-                    </div>
+        getLastKnownLocationObservable<span style="color:#f92672">(</span>locationApi<span style="color:#f92672">).</span><span style="color:#a6e22e">switchIfEmpty</span><span style="color:#f92672">(</span>locationApi<span style="color:#f92672">.</span><span style="color:#a6e22e">resolveUserLocation</span><span style="color:#f92672">())</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>location <span style="color:#f92672">-&gt;</span> weatherApi<span style="color:#f92672">.</span><span style="color:#a6e22e">getTemp</span><span style="color:#f92672">(</span>location<span style="color:#f92672">.</span><span style="color:#a6e22e">lat</span><span style="color:#f92672">,</span> location<span style="color:#f92672">.</span><span style="color:#a6e22e">lng</span><span style="color:#f92672">)</span>
+                        <span style="color:#f92672">.</span><span style="color:#a6e22e">zipWith</span><span style="color:#f92672">(</span>placesApi<span style="color:#f92672">.</span><span style="color:#a6e22e">reverseGeocode</span><span style="color:#f92672">(</span>location<span style="color:#f92672">.</span><span style="color:#a6e22e">lat</span><span style="color:#f92672">,</span> location<span style="color:#f92672">.</span><span style="color:#a6e22e">lng</span><span style="color:#f92672">),</span> <span style="color:#f92672">(</span>Func2<span style="color:#f92672">&lt;</span>Weather<span style="color:#f92672">,</span> City<span style="color:#f92672">,</span> Pair<span style="color:#f92672">&gt;)</span> Pair<span style="color:#f92672">::</span><span style="color:#66d9ef">new</span><span style="color:#f92672">))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">subscribe</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">::</span>println<span style="color:#f92672">);</span>
+
+        mockWebServer<span style="color:#f92672">.</span><span style="color:#a6e22e">shutdown</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Observable<span style="color:#f92672">&lt;</span>Location<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getLastKnownLocationObservable</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> LocationApi locationApi<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#75715e">//        return Observable.empty();
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> locationApi<span style="color:#f92672">.</span><span style="color:#a6e22e">getLastKnownLocation</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">Last modified on 2020-07-03</p>
+                    
                 </div>
+            </div>
             
-        
             
-            <a href="http://example.org/rxjavapatterns/functional/exponential_backoff/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Exponential Backoff
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-08
-    &emsp;
-    
-    
-    
-    &emsp;
-    
+            <nav class="post-pagination">
 
-    </br>
-    When scheduling repeated work &lt;a href=&#34;https://en.wikipedia.org/wiki/Exponential_backoff&#34;&gt;Exponentia ...
-</div>
+                
+                <a class="newer-posts" href="http://example.org/rxjavapatterns/network_requests/cache_network_responses/">
+			Next<br>Cache Network Responses
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://example.org/rxjavapatterns/network_requests/retrofit_android/">
+			Previous<br>Retrofit Android
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/functional/autosuggest/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Autosuggest
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-07
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    The auto suggest demo, demonstrates a possible implementation for text based suggestion using rx. Th ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/various/sharing_values/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Sharing Values
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-06
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    A common pattern is sharing the result of an Observable between multiple subsribers, for example a n ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/various/scheduling_network_requests/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Scheduling Network Requests
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-05
-    &emsp;
-    
-    
-    
-    &emsp;
-    
 
-    </br>
-    This pattern demonstrates scheduling periodic network requests which can be useful for keeping data  ...
-</div>
 
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/cache_network_responses/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Cache Network Responses
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-04
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This pattern demonstrates a strategy for caching network data using reactive extensions. It is a com ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/combine_network_requests/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Combine Network Requests/Responses
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-03
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This pattern demonstrates retrieving data from an asynchronous datasource and then using the result  ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/network_requests/retrofit_android/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Retrofit Android
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-02
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This patterns demos executing a &lt;a href=&#34;http://square.github.io/retrofit/&#34;&gt;Retrofit&lt;/a&gt; request wit ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-            
-            <a href="http://example.org/rxjavapatterns/combined/creating_pairs/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-divider">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Creating Pairs
-                            </div>
-                            <div class="post-item-summary">
-                                
-                            </div>
-                            <div class="post-item-meta">
-    2020-07-01
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-
-    </br>
-    This demo generates consecutive pairs from a sequence of numbers. This is done by combining the orig ...
-</div>
-
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            
-        
-        </a>
+            </div>
+        </div>
     </div>
 </div>
 
-            </div>
-
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
