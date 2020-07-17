@@ -2,51 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Async Code Patterns</title>
-    <link>http://example.org/rxjavapatterns/functional/</link>
+    <link>/rxjavapatterns/functional/</link>
     <description>Recent content on Async Code Patterns</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Jul 2020 11:35:28 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/rxjavapatterns/functional/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/rxjavapatterns/functional/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Reacting To User Input</title>
-      <link>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</link>
+      <link>/rxjavapatterns/functional/reacting_to_user_input/</link>
       <pubDate>Fri, 10 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</guid>
+      <guid>/rxjavapatterns/functional/reacting_to_user_input/</guid>
       <description>This demo consists of a user interface containing a zipcode and housenumber fields. We want to retrieve the addess for zipcode and housenumber combination when both fields are filled-in by the user and valid. When the housenumber changes, we want to wait 300ms before exeuting the request. This demo is written in Android/Kotlin and uses an extension function to convert the EditText input to an Observable.
 class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?</description>
     </item>
     
     <item>
       <title>SQS Long Polling</title>
-      <link>http://example.org/rxjavapatterns/functional/sqs_long_polling/</link>
+      <link>/rxjavapatterns/functional/sqs_long_polling/</link>
       <pubDate>Thu, 09 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/functional/sqs_long_polling/</guid>
+      <guid>/rxjavapatterns/functional/sqs_long_polling/</guid>
       <description>Demonstrates SQS long polling with RxJava. A long polling request may return 0 or more messages up to the configured maximum. Those messages are processed in parallel and a new long polling request is started when all messages are processed.
 import rx.Observable; import rx.schedulers.Schedulers; import java.util.ArrayList; import java.util.List; import java.util.Random; public class SqsReceiverSample { private static final Random RANDOM = new Random(); public static void main(String[] args) throws InterruptedException { new SqsReceiverSample().</description>
     </item>
     
     <item>
       <title>Exponential Backoff</title>
-      <link>http://example.org/rxjavapatterns/functional/exponential_backoff/</link>
+      <link>/rxjavapatterns/functional/exponential_backoff/</link>
       <pubDate>Wed, 08 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/functional/exponential_backoff/</guid>
+      <guid>/rxjavapatterns/functional/exponential_backoff/</guid>
       <description>When scheduling repeated work Exponential backoff can be used to retry a failed request. When the scheduling interval is high (for example 1 hour), this makes sure the request is retried relatively fast so you do not have to wait before the next interval occurs.
 Exponential backoff can be implemented using the onErrorResumeNext function and then comparing the actual number of invocations with a specified maximum. Each next invocation is delayed exponentially more then the previous invocation.</description>
     </item>
     
     <item>
       <title>Autosuggest</title>
-      <link>http://example.org/rxjavapatterns/functional/autosuggest/</link>
+      <link>/rxjavapatterns/functional/autosuggest/</link>
       <pubDate>Tue, 07 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/functional/autosuggest/</guid>
+      <guid>/rxjavapatterns/functional/autosuggest/</guid>
       <description>The auto suggest demo, demonstrates a possible implementation for text based suggestion using rx. The following solution address the following, functional problems:
  Only execute a search request if there are at least 3 characters typed in by the user. The filter operator is used for this. Do not execute search requests when the user types in characters too fast. The debounce operator is used for this. Make sure older search results are disgarded when the user has typed additional characters to further limit the search.</description>
     </item>

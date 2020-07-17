@@ -1,23 +1,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Async Code Patterns</title>
-    <link>http://example.org/</link>
+    <link>/</link>
     <description>Recent content on Async Code Patterns</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Jul 2020 11:35:28 +0200</lastBuildDate>
     
-        <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     
         <item>
         <title>Reacting To User Input</title>
-        <link>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</link>
+        <link>/rxjavapatterns/functional/reacting_to_user_input/</link>
         <pubDate>Fri, 10 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/functional/reacting_to_user_input/ -&lt;p&gt;This demo consists of a user interface containing a zipcode and housenumber fields. We want to retrieve the addess for zipcode and housenumber combination when both fields are filled-in by the user and valid. When the housenumber changes, we want to wait 300ms before exeuting the request. This demo is written in Android/Kotlin and uses an extension function to convert the EditText input to an Observable.&lt;/p&gt;
+        <guid>/rxjavapatterns/functional/reacting_to_user_input/</guid>
+        <description>Async Code Patterns /rxjavapatterns/functional/reacting_to_user_input/ -&lt;p&gt;This demo consists of a user interface containing a zipcode and housenumber fields. We want to retrieve the addess for zipcode and housenumber combination when both fields are filled-in by the user and valid. When the housenumber changes, we want to wait 300ms before exeuting the request. This demo is written in Android/Kotlin and uses an extension function to convert the EditText input to an Observable.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MainActivity&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; AppCompatActivity&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     override fun &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; Bundle&lt;span style=&#34;color:#f92672&#34;&gt;?)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -68,18 +68,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
     &lt;span style=&#34;color:#f92672&#34;&gt;})&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; subject
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/functional/reacting_to_user_input/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/functional/reacting_to_user_input/ - </description>
         </item>
     
     
     
         <item>
         <title>SQS Long Polling</title>
-        <link>http://example.org/rxjavapatterns/functional/sqs_long_polling/</link>
+        <link>/rxjavapatterns/functional/sqs_long_polling/</link>
         <pubDate>Thu, 09 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/functional/sqs_long_polling/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/functional/sqs_long_polling/ -&lt;p&gt;Demonstrates &lt;a href=&#34;https://aws.amazon.com/sqs/&#34;&gt;SQS&lt;/a&gt; long polling with RxJava. A long polling request may return 0 or more messages up to the configured maximum. Those messages are processed in parallel and a new long polling request is started when all messages are processed.&lt;/p&gt;
+        <guid>/rxjavapatterns/functional/sqs_long_polling/</guid>
+        <description>Async Code Patterns /rxjavapatterns/functional/sqs_long_polling/ -&lt;p&gt;Demonstrates &lt;a href=&#34;https://aws.amazon.com/sqs/&#34;&gt;SQS&lt;/a&gt; long polling with RxJava. A long polling request may return 0 or more messages up to the configured maximum. Those messages are processed in parallel and a new long polling request is started when all messages are processed.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; rx.Observable&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; rx.schedulers.Schedulers&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
 
@@ -159,18 +159,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         &lt;span style=&#34;color:#f92672&#34;&gt;});&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/functional/sqs_long_polling/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/functional/sqs_long_polling/ - </description>
         </item>
     
     
     
         <item>
         <title>Exponential Backoff</title>
-        <link>http://example.org/rxjavapatterns/functional/exponential_backoff/</link>
+        <link>/rxjavapatterns/functional/exponential_backoff/</link>
         <pubDate>Wed, 08 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/functional/exponential_backoff/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/functional/exponential_backoff/ -&lt;p&gt;When scheduling repeated work &lt;a href=&#34;https://en.wikipedia.org/wiki/Exponential_backoff&#34;&gt;Exponential backoff&lt;/a&gt; can be used to retry a failed request. When the scheduling interval is high (for example 1 hour), this makes sure the request is retried relatively fast so you do not have to wait before the next interval occurs.&lt;/p&gt;
+        <guid>/rxjavapatterns/functional/exponential_backoff/</guid>
+        <description>Async Code Patterns /rxjavapatterns/functional/exponential_backoff/ -&lt;p&gt;When scheduling repeated work &lt;a href=&#34;https://en.wikipedia.org/wiki/Exponential_backoff&#34;&gt;Exponential backoff&lt;/a&gt; can be used to retry a failed request. When the scheduling interval is high (for example 1 hour), this makes sure the request is retried relatively fast so you do not have to wait before the next interval occurs.&lt;/p&gt;
 &lt;p&gt;Exponential backoff can be implemented using the onErrorResumeNext function and then comparing the actual number of invocations with a specified maximum. Each next invocation is delayed exponentially more then the previous invocation.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ExponentialBackOff&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; String RESPONSE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;[\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
@@ -256,18 +256,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/functional/exponential_backoff/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/functional/exponential_backoff/ - </description>
         </item>
     
     
     
         <item>
         <title>Autosuggest</title>
-        <link>http://example.org/rxjavapatterns/functional/autosuggest/</link>
+        <link>/rxjavapatterns/functional/autosuggest/</link>
         <pubDate>Tue, 07 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/functional/autosuggest/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/functional/autosuggest/ -&lt;p&gt;The auto suggest demo, demonstrates a possible implementation for text based suggestion using rx. The following solution address the following, functional problems:&lt;/p&gt;
+        <guid>/rxjavapatterns/functional/autosuggest/</guid>
+        <description>Async Code Patterns /rxjavapatterns/functional/autosuggest/ -&lt;p&gt;The auto suggest demo, demonstrates a possible implementation for text based suggestion using rx. The following solution address the following, functional problems:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Only execute a search request if there are at least 3 characters typed in by the user. The filter operator is used for this.&lt;/li&gt;
 &lt;li&gt;Do not execute search requests when the user types in characters too fast. The debounce operator is used for this.&lt;/li&gt;
@@ -332,18 +332,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/functional/autosuggest/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/functional/autosuggest/ - </description>
         </item>
     
     
     
         <item>
         <title>Sharing Values</title>
-        <link>http://example.org/rxjavapatterns/various/sharing_values/</link>
+        <link>/rxjavapatterns/various/sharing_values/</link>
         <pubDate>Mon, 06 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/various/sharing_values/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/various/sharing_values/ -&lt;p&gt;A common pattern is sharing the result of an Observable between multiple subsribers, for example a network call. For demonstration purposes the System::nanoTime is emitted. By using the combination of&lt;/p&gt;
+        <guid>/rxjavapatterns/various/sharing_values/</guid>
+        <description>Async Code Patterns /rxjavapatterns/various/sharing_values/ -&lt;p&gt;A common pattern is sharing the result of an Observable between multiple subsribers, for example a network call. For demonstration purposes the System::nanoTime is emitted. By using the combination of&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html#share--&#34;&gt;share&lt;/a&gt; multicasts the original observer as long as there is at least one subscriber.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html#replay--&#34;&gt;replay&lt;/a&gt; returns a ConnectableObservable that shares a single subscription to the underlying Observable that will replay all of its items and notifications to any future Observer.&lt;/li&gt;
@@ -359,18 +359,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         obs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;subscribe&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;System&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;println&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/various/sharing_values/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/various/sharing_values/ - </description>
         </item>
     
     
     
         <item>
         <title>Scheduling Network Requests</title>
-        <link>http://example.org/rxjavapatterns/various/scheduling_network_requests/</link>
+        <link>/rxjavapatterns/various/scheduling_network_requests/</link>
         <pubDate>Sun, 05 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/various/scheduling_network_requests/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/various/scheduling_network_requests/ -&lt;p&gt;This pattern demonstrates scheduling periodic network requests which can be useful for keeping data up-to-date where web sockets or some other pusb based technology is not an option. To retrieve data from the network the switchMap operator is used instead of the flatMap operator. The difference between those operators is explained &lt;a href=&#34;https://medium.com/appunite-edu-collection/rxjava-flatmap-switchmap-and-concatmap-differences-examples-6d1f3ff88ee0&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+        <guid>/rxjavapatterns/various/scheduling_network_requests/</guid>
+        <description>Async Code Patterns /rxjavapatterns/various/scheduling_network_requests/ -&lt;p&gt;This pattern demonstrates scheduling periodic network requests which can be useful for keeping data up-to-date where web sockets or some other pusb based technology is not an option. To retrieve data from the network the switchMap operator is used instead of the flatMap operator. The difference between those operators is explained &lt;a href=&#34;https://medium.com/appunite-edu-collection/rxjava-flatmap-switchmap-and-concatmap-differences-examples-6d1f3ff88ee0&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To make sure the scheduler does not die when the Observable in switchMap emits an error, the onErrorResumeNext function is used to provide an alternative response in case of errors.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SchedulingExceptionDemo&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -402,18 +402,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         mockWebServer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;shutdown&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/various/scheduling_network_requests/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/various/scheduling_network_requests/ - </description>
         </item>
     
     
     
         <item>
         <title>Cache Network Responses</title>
-        <link>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</link>
+        <link>/rxjavapatterns/network_requests/cache_network_responses/</link>
         <pubDate>Sat, 04 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/network_requests/cache_network_responses/ -&lt;p&gt;This pattern demonstrates a strategy for caching network data using reactive extensions. It is a common pattern to cache data a specific time before fetching it again from a network. The basic flow is as follows:&lt;/p&gt;
+        <guid>/rxjavapatterns/network_requests/cache_network_responses/</guid>
+        <description>Async Code Patterns /rxjavapatterns/network_requests/cache_network_responses/ -&lt;p&gt;This pattern demonstrates a strategy for caching network data using reactive extensions. It is a common pattern to cache data a specific time before fetching it again from a network. The basic flow is as follows:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Fetch data from the in-memory store if it exists and is not stale.&lt;/li&gt;
 &lt;li&gt;Fetch data from the disk store if it exists and is not stale.&lt;/li&gt;
@@ -524,18 +524,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/network_requests/cache_network_responses/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/network_requests/cache_network_responses/ - </description>
         </item>
     
     
     
         <item>
         <title>Combine Network Requests/Responses</title>
-        <link>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</link>
+        <link>/rxjavapatterns/network_requests/combine_network_requests/</link>
         <pubDate>Fri, 03 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/network_requests/combine_network_requests/ -&lt;p&gt;This pattern demonstrates retrieving data from an asynchronous datasource and then using the result of this invocation to retrieve two pieces of data from two other asynchronous data sources and then combining the result of both invocations in one response.&lt;/p&gt;
+        <guid>/rxjavapatterns/network_requests/combine_network_requests/</guid>
+        <description>Async Code Patterns /rxjavapatterns/network_requests/combine_network_requests/ -&lt;p&gt;This pattern demonstrates retrieving data from an asynchronous datasource and then using the result of this invocation to retrieve two pieces of data from two other asynchronous data sources and then combining the result of both invocations in one response.&lt;/p&gt;
 &lt;p&gt;Please note that when one of the sources in the zipWith operator fails, no result is retured at all since zipWith needs both observables to emit a value.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CombineNetworkRequests&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -564,18 +564,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; locationApi&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getLastKnownLocation&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/network_requests/combine_network_requests/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/network_requests/combine_network_requests/ - </description>
         </item>
     
     
     
         <item>
         <title>Retrofit Android</title>
-        <link>http://example.org/rxjavapatterns/network_requests/retrofit_android/</link>
+        <link>/rxjavapatterns/network_requests/retrofit_android/</link>
         <pubDate>Thu, 02 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/network_requests/retrofit_android/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/network_requests/retrofit_android/ -&lt;p&gt;This patterns demos executing a &lt;a href=&#34;http://square.github.io/retrofit/&#34;&gt;Retrofit&lt;/a&gt; request within Android. To always execute the request in the background you can create the RxJavaCallAdapter by using the Schedulers.io() scheduler. For testing you can pass an immediate() or a test scheduler during creation of the API.&lt;/p&gt;
+        <guid>/rxjavapatterns/network_requests/retrofit_android/</guid>
+        <description>Async Code Patterns /rxjavapatterns/network_requests/retrofit_android/ -&lt;p&gt;This patterns demos executing a &lt;a href=&#34;http://square.github.io/retrofit/&#34;&gt;Retrofit&lt;/a&gt; request within Android. To always execute the request in the background you can create the RxJavaCallAdapter by using the Schedulers.io() scheduler. For testing you can pass an immediate() or a test scheduler during creation of the API.&lt;/p&gt;
 &lt;p&gt;Make sure that when you touch any views in the subsribe function, you must use observeOn(AndroidSchedulers.mainThread()) because views can only be updated from the main thread. Also use an onError handler to avoid OnErrorNotImplemented exceptions.&lt;/p&gt;
 &lt;p&gt;The subscription is unsubscribed when the network request is finished. It is good practive however to unsubsribe in the proper life-cycle method, for example onPause(). For this you can use a CompositeSubscription and add any subscriptions that must be unsubscribed when the activity pauses. To unsubscribe using a CompositeSubscription call its clear() method. By using the clear() method, the CompositeSubscription can be re-used in contrast to the unsubscribe() method.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RetrofitTest&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -604,18 +604,18 @@ fun EditText&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span sty
                 &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;TestApi&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/network_requests/retrofit_android/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/network_requests/retrofit_android/ - </description>
         </item>
     
     
     
         <item>
         <title>Creating Pairs</title>
-        <link>http://example.org/rxjavapatterns/combined/creating_pairs/</link>
+        <link>/rxjavapatterns/combined/creating_pairs/</link>
         <pubDate>Wed, 01 Jul 2020 11:35:28 +0200</pubDate>
         
-        <guid>http://example.org/rxjavapatterns/combined/creating_pairs/</guid>
-        <description>Async Code Patterns http://example.org/rxjavapatterns/combined/creating_pairs/ -&lt;p&gt;This demo generates consecutive pairs from a sequence of numbers. This is done by combining the original sequence with the same sequence starting from the second element (the skip(1)). The zip function combines the elements from both streams in order and emits as many items as the source observable with the fewest items. See &lt;a href=&#34;http://reactivex.io/documentation/operators/zip.html&#34;&gt;Zip function&lt;/a&gt;.&lt;/p&gt;
+        <guid>/rxjavapatterns/combined/creating_pairs/</guid>
+        <description>Async Code Patterns /rxjavapatterns/combined/creating_pairs/ -&lt;p&gt;This demo generates consecutive pairs from a sequence of numbers. This is done by combining the original sequence with the same sequence starting from the second element (the skip(1)). The zip function combines the elements from both streams in order and emits as many items as the source observable with the fewest items. See &lt;a href=&#34;http://reactivex.io/documentation/operators/zip.html&#34;&gt;Zip function&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Input:  1 - 2 - 3 - 4 - 5 - 6 - 7 - 8
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Output: [1, 2] - [2, 3]-  [3, 4]-  [4, 5] -  [5, 6] - [6, 7], [7, 8]
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; Observable&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Observable&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Arrays&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;asList&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 2&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 3&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 4&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 5&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 6&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 7&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; 8&lt;span style=&#34;color:#f92672&#34;&gt;));&lt;/span&gt;
@@ -624,7 +624,7 @@ numbers
         &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;zipWith&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;numbers
                 &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;skip&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;first&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; second&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Arrays&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;asList&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;first&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; second&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt;
         &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;subscribe&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;System&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;println&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- http://example.org/rxjavapatterns/combined/creating_pairs/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /rxjavapatterns/combined/creating_pairs/ - </description>
         </item>
     
     

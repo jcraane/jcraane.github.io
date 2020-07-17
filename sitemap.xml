@@ -3,91 +3,91 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/rxjavapatterns/functional/</loc>
+    <loc>/rxjavapatterns/functional/</loc>
     <lastmod>2020-07-10T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>/</loc>
     <lastmod>2020-07-10T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/functional/reacting_to_user_input/</loc>
+    <loc>/rxjavapatterns/functional/reacting_to_user_input/</loc>
     <lastmod>2020-07-10T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/</loc>
+    <loc>/rxjavapatterns/</loc>
     <lastmod>2020-07-10T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/functional/sqs_long_polling/</loc>
+    <loc>/rxjavapatterns/functional/sqs_long_polling/</loc>
     <lastmod>2020-07-09T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/functional/exponential_backoff/</loc>
+    <loc>/rxjavapatterns/functional/exponential_backoff/</loc>
     <lastmod>2020-07-08T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/functional/autosuggest/</loc>
+    <loc>/rxjavapatterns/functional/autosuggest/</loc>
     <lastmod>2020-07-07T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/various/</loc>
+    <loc>/rxjavapatterns/various/</loc>
     <lastmod>2020-07-06T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/various/sharing_values/</loc>
+    <loc>/rxjavapatterns/various/sharing_values/</loc>
     <lastmod>2020-07-06T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/various/scheduling_network_requests/</loc>
+    <loc>/rxjavapatterns/various/scheduling_network_requests/</loc>
     <lastmod>2020-07-05T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/network_requests/</loc>
+    <loc>/rxjavapatterns/network_requests/</loc>
     <lastmod>2020-07-04T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/network_requests/cache_network_responses/</loc>
+    <loc>/rxjavapatterns/network_requests/cache_network_responses/</loc>
     <lastmod>2020-07-04T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/network_requests/combine_network_requests/</loc>
+    <loc>/rxjavapatterns/network_requests/combine_network_requests/</loc>
     <lastmod>2020-07-03T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/network_requests/retrofit_android/</loc>
+    <loc>/rxjavapatterns/network_requests/retrofit_android/</loc>
     <lastmod>2020-07-02T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/combined/</loc>
+    <loc>/rxjavapatterns/combined/</loc>
     <lastmod>2020-07-01T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/rxjavapatterns/combined/creating_pairs/</loc>
+    <loc>/rxjavapatterns/combined/creating_pairs/</loc>
     <lastmod>2020-07-01T11:35:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>/categories/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Async Code Patterns</title>
-    <link>http://example.org/rxjavapatterns/various/</link>
+    <link>/rxjavapatterns/various/</link>
     <description>Recent content on Async Code Patterns</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 06 Jul 2020 11:35:28 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/rxjavapatterns/various/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/rxjavapatterns/various/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sharing Values</title>
-      <link>http://example.org/rxjavapatterns/various/sharing_values/</link>
+      <link>/rxjavapatterns/various/sharing_values/</link>
       <pubDate>Mon, 06 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/various/sharing_values/</guid>
+      <guid>/rxjavapatterns/various/sharing_values/</guid>
       <description>A common pattern is sharing the result of an Observable between multiple subsribers, for example a network call. For demonstration purposes the System::nanoTime is emitted. By using the combination of
  share multicasts the original observer as long as there is at least one subscriber. replay returns a ConnectableObservable that shares a single subscription to the underlying Observable that will replay all of its items and notifications to any future Observer.</description>
     </item>
     
     <item>
       <title>Scheduling Network Requests</title>
-      <link>http://example.org/rxjavapatterns/various/scheduling_network_requests/</link>
+      <link>/rxjavapatterns/various/scheduling_network_requests/</link>
       <pubDate>Sun, 05 Jul 2020 11:35:28 +0200</pubDate>
       
-      <guid>http://example.org/rxjavapatterns/various/scheduling_network_requests/</guid>
+      <guid>/rxjavapatterns/various/scheduling_network_requests/</guid>
       <description>This pattern demonstrates scheduling periodic network requests which can be useful for keeping data up-to-date where web sockets or some other pusb based technology is not an option. To retrieve data from the network the switchMap operator is used instead of the flatMap operator. The difference between those operators is explained here.
 To make sure the scheduler does not die when the Observable in switchMap emits an error, the onErrorResumeNext function is used to provide an alternative response in case of errors.</description>
     </item>
